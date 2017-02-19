@@ -1,0 +1,24 @@
+{
+  "name": "linkorb/pipeline",
+  "description": "Pipeline processing library",
+  "homepage": "https://github.com/linkorb/pipeline",
+  "keywords": ["pipeline", "processing", "linkorb"],
+  "type": "library",
+  "authors": [
+    {
+      "name": "LinkORB Engineering",
+      "email": "engineering@linkorb.com",
+      "role": "Development"
+    }
+  ],
+  "require": {
+    "symfony/yaml": "~2.7",
+    "symfony/process": "~2.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pipeline\\": "src/"
+    }
+  },
+  "license": "MIT"
+}
