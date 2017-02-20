@@ -30,4 +30,23 @@ class JobResult
         return $this;
     }
 
+    public function getOutput()
+    {
+        $output = null;
+        foreach ($this->stageResults as $stageResult) {
+            $output = $stageResult->getOutput();
+        }
+        return $output;
+    }
+
+
+    public function isSuccessful()
+    {
+        foreach ($this->stageResults as $stageResult) {
+            if ($stageResult->getExitCode()!=0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

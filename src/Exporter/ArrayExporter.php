@@ -20,6 +20,8 @@ class ArrayExporter
         foreach ($jobResult->getStageResults() as $stageResult) {
             $data['stage_results'][] = $this->exportStageResult($stageResult);
         }
+        $data['output'] = $jobResult->getOutput();
+        $data['successful'] = $jobResult->isSuccessful();
 
         return $data;
     }
