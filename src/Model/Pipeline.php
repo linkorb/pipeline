@@ -29,4 +29,18 @@ class Pipeline
         return $this;
     }
 
+    protected $workingDirectory;
+
+    public function getWorkingDirectory()
+    {
+        return $this->workingDirectory;
+    }
+
+    public function setWorkingDirectory($workingDirectory)
+    {
+        $this->workingDirectory = $workingDirectory;
+        return $this;
+    }
+
+
 }

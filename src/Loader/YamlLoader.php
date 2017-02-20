@@ -58,7 +58,7 @@ class YamlLoader
     public function load($data, $basePath)
     {
         $pipeline = new Pipeline($data['name']);
-        //$pipeline->setBasePath($basePath);
+        $pipeline->setWorkingDirectory($basePath);
 
         foreach ($data['stages'] as $name => $stageData) {
             $stage = new Stage($name);

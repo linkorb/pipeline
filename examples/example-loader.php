@@ -14,7 +14,6 @@ $pipeline = $loader->loadFile(__DIR__ . '/demo.pipeline.yml');
 
 $job = new Job($pipeline);
 $job->setVariable('topic', 'technology');
-$job->setWorkingDirectory(__DIR__ . '/');
 
 $processor = new Processor();
 $result = $processor->process($job);

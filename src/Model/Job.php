@@ -45,7 +45,10 @@ class Job
 
     public function getWorkingDirectory()
     {
-        return $this->workingDirectory;
+        if ($this->workingDirectory) {
+            return $this->workingDirectory;
+        }
+        return $this->pipeline->getWorkingDirectory();
     }
 
     public function setWorkingDirectory($workingDirectory)
@@ -53,5 +56,4 @@ class Job
         $this->workingDirectory = $workingDirectory;
         return $this;
     }
-
 }
