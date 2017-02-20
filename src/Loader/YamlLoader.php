@@ -5,7 +5,6 @@ namespace Pipeline\Loader;
 use Pipeline\Model\Pipeline;
 use Pipeline\Model\Stage;
 use Symfony\Component\Yaml\Yaml as YamlParser;
-
 use RuntimeException;
 
 class YamlLoader
@@ -18,6 +17,7 @@ class YamlLoader
         }
         $basePath = dirname($filename);
         $data = $this->loadYaml($filename);
+
         return $this->load($data, $basePath);
     }
 
@@ -28,6 +28,7 @@ class YamlLoader
                 'Failed to load yaml file "%s": File not found.',
                 $filename
             );
+
             return array();
         }
         $basePath = dirname($filename);
@@ -41,6 +42,7 @@ class YamlLoader
                     'Failed to get any yaml content from file "%s".',
                     $filename
                 );
+
                 return array();
             }
         } catch (ParseException $e) {
@@ -49,10 +51,11 @@ class YamlLoader
                 $filename,
                 $e->getMessage()
             );
+
             return array();
         }
-        return $data;
 
+        return $data;
     }
 
     public function load($data, $basePath)
@@ -65,6 +68,12 @@ class YamlLoader
             $stage->setCommand($stageData['command']);
 
             $pipeline->addStage($stage);
+        }
+
+        if (isset($data['variables'])) {
+            foreach ($data['variables'] as $key => $value) {
+                $pipeline->setVariable($key, $value);
+            }
         }
 
         return $pipeline;

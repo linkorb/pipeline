@@ -25,6 +25,7 @@ class Job
     public function setVariable($key, $value)
     {
         $this->variables[$key] = $value;
+
         return $this;
     }
 

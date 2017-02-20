@@ -5,6 +5,7 @@ namespace Pipeline\Model;
 class Pipeline
 {
     protected $name;
+    protected $variables = [];
 
     public function __construct($name)
     {
@@ -42,5 +43,15 @@ class Pipeline
         return $this;
     }
 
+    public function getVariables()
+    {
+        return $this->variables;
+    }
 
+    public function setVariable($key, $value)
+    {
+        $this->variables[$key] = $value;
+
+        return $this;
+    }
 }

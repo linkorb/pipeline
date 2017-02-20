@@ -13,14 +13,17 @@ class Processor
 {
     public function process(Job $job)
     {
+        $pipeline = $job->getPipeline();
+        $pipelineVars = $pipeline->getVariables();
         $arguments = $job->getVariables();
+        $arguments = array_merge($pipelineVars, $arguments);
         $jobResult = new JobResult($job);
 
         $input = $job->getInput();
-        foreach ($job->getPipeline()->getStages() as $stage) {
+        foreach ($pipeline->getStages() as $stage) {
             $command = $stage->getCommand();
-            foreach ($arguments as $key=>$value) {
-                $command = str_replace('{' . $key . '}', $value, $command);
+            foreach ($arguments as $key => $value) {
+                $command = str_replace('{'.$key.'}', $value, $command);
             }
             $stageResult = new StageResult($stage);
             $stageResult->setCommand($command);
@@ -40,6 +43,7 @@ class Processor
                 return $jobResult;
             }
         }
+
         return $jobResult;
     }
 }
