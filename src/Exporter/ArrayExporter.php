@@ -30,7 +30,7 @@ class ArrayExporter
         $data['stage'] = $this->exportStage($stageResult->getStage());
         $data['command'] = $stageResult->getCommand();
         $data['output'] = $stageResult->getOutput();
-        $data['error_output'] = $stageResult->getOutput();
+        $data['error_output'] = $stageResult->getErrorOutput();
         $data['exit_code'] = $stageResult->getExitCode();
         $data['output'] = $stageResult->getOutput();
         return $data;
