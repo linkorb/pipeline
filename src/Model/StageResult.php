@@ -17,6 +17,19 @@ class StageResult
         return $this->stage;
     }
 
+    protected $command;
+
+    public function getCommand()
+    {
+        return $this->command;
+    }
+
+    public function setCommand($command)
+    {
+        $this->command = $command;
+        return $this;
+    }
+
     protected $exitCode;
 
     public function getExitCode()

@@ -6,7 +6,6 @@ namespace Pipeline\Model;
 class Stage
 {
     protected $name;
-    protected $command;
 
     public function __construct($name)
     {
@@ -17,6 +16,8 @@ class Stage
     {
         return $this->name;
     }
+
+    protected $command;
 
     public function getCommand()
     {

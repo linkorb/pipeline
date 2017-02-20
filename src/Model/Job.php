@@ -5,6 +5,17 @@ namespace Pipeline\Model;
 class Job
 {
     protected $variables = [];
+    protected $pipeline;
+
+    public function __construct(Pipeline $pipeline)
+    {
+        $this->pipeline = $pipeline;
+    }
+
+    public function getPipeline()
+    {
+        return $this->pipeline;
+    }
 
     public function getVariables()
     {

@@ -11,18 +11,19 @@ use Pipeline\Model\JobResult;
 
 class Processor
 {
-    public function process(Pipeline $pipeline, Job $job)
+    public function process(Job $job)
     {
         $arguments = $job->getVariables();
         $jobResult = new JobResult($job);
 
         $input = $job->getInput();
-        foreach ($pipeline->getStages() as $stage) {
+        foreach ($job->getPipeline()->getStages() as $stage) {
             $command = $stage->getCommand();
             foreach ($arguments as $key=>$value) {
                 $command = str_replace('{' . $key . '}', $value, $command);
             }
             $stageResult = new StageResult($stage);
+            $stageResult->setCommand($command);
             $jobResult->addStageResult($stageResult);
 
             $process = new Process($command);
