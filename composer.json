@@ -22,5 +22,6 @@
       "Pipeline\\": "src/"
     }
   },
+  "bin": ["bin/pipeline"],
   "license": "MIT"
 }
