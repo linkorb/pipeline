@@ -5,6 +5,7 @@ namespace Pipeline\Model;
 class Pipeline
 {
     protected $name;
+    use VariableTrait;
 
     public function __construct($name)
     {

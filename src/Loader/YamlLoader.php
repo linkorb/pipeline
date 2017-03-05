@@ -59,6 +59,11 @@ class YamlLoader
     {
         $pipeline = new Pipeline($data['name']);
         $pipeline->setWorkingDirectory($basePath);
+        if (isset($data['variables'])) {
+            foreach ($data['variables'] as $key => $value) {
+                $pipeline->setVariable($key, $value);
+            }
+        }
 
         foreach ($data['stages'] as $name => $stageData) {
             $stage = new Stage($name);

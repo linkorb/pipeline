@@ -8,18 +8,26 @@ use Pipeline\Model\Stage;
 use Pipeline\Model\Job;
 use Pipeline\Model\StageResult;
 use Pipeline\Model\JobResult;
+use RuntimeException;
 
 class Processor
 {
     public function process(Job $job)
     {
-        $arguments = $job->getVariables();
+        $variables = $job->getPipeline()->getVariables();
+        $variables = array_merge($variables, $job->getVariables());
+        foreach ($variables as $key => $value) {
+            if (trim($value)=='?') {
+                throw new RuntimeException("Require input variable undefined: " . $key);
+            }
+        }
+
         $jobResult = new JobResult($job);
 
         $input = $job->getInput();
         foreach ($job->getPipeline()->getStages() as $stage) {
             $command = $stage->getCommand();
-            foreach ($arguments as $key=>$value) {
+            foreach ($variables as $key => $value) {
                 $command = str_replace('{' . $key . '}', $value, $command);
             }
             $stageResult = new StageResult($stage);

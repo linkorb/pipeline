@@ -4,8 +4,8 @@ namespace Pipeline\Model;
 
 class Job
 {
-    protected $variables = [];
     protected $pipeline;
+    use VariableTrait;
 
     public function __construct(Pipeline $pipeline)
     {
@@ -15,17 +15,6 @@ class Job
     public function getPipeline()
     {
         return $this->pipeline;
-    }
-
-    public function getVariables()
-    {
-        return $this->variables;
-    }
-
-    public function setVariable($key, $value)
-    {
-        $this->variables[$key] = $value;
-        return $this;
     }
 
     protected $input;
