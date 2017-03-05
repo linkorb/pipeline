@@ -79,6 +79,7 @@ class RunCommand extends Command
 
         $lastResult = array_pop($stageResults);
         $output->writeLn("<error>Error in stage: " . $lastResult->getStage()->getName() . "</error>");
+        $output->writeLn("<info>" . rtrim($lastResult->getOutput(), "\n") . "</info>");
         $output->writeLn("<comment>" . rtrim($lastResult->getErrorOutput(), "\n") . "</comment>");
         exit($lastResult->getExitCode());
     }
