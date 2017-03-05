@@ -66,14 +66,14 @@ class RunCommand extends Command
             echo $result->getOutput();
             exit(0);
         }
+
         $stageResults = $result->getStageResults();
         foreach ($stageResults as $stageResult) {
-            $output->writeLn("<info>Stage: " . $stageResult->getStage()->getName() . "</info>");
-            $output->writeLn("<comment> * Command:</comment>" . $stageResult->getCommand());
-            $output->writeLn("<comment> * Exitcode:</comment> " . $stageResult->getExitCode());
+            $output->writeLn("<info>Stage: " . $stageResult->getStage()->getName() . "</info>", OutputInterface::VERBOSITY_VERBOSE);
+            $output->writeLn("<comment> * Command:</comment>" . $stageResult->getCommand(), OutputInterface::VERBOSITY_VERBOSE);
+            $output->writeLn("<comment> * Exitcode:</comment> " . $stageResult->getExitCode(), OutputInterface::VERBOSITY_VERBOSE);
             //$output->writeLn("<comment>" . rtrim($stageResult->getOutput(), "\n") . "</comment>");
-            $output->writeLn("");
-
+            $output->writeLn("", OutputInterface::VERBOSITY_VERBOSE);
         }
 
 
