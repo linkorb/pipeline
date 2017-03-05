@@ -25,7 +25,7 @@ class Processor
         $jobResult = new JobResult($job);
 
         $input = $job->getInput();
-        foreach ($job->getPipeline()->getStages() as $stage) {
+        foreach ($pipeline->getStages() as $stage) {
             $command = $stage->getCommand();
             foreach ($variables as $key => $value) {
                 $command = str_replace('{' . $key . '}', $value, $command);
@@ -48,6 +48,7 @@ class Processor
                 return $jobResult;
             }
         }
+
         return $jobResult;
     }
 }

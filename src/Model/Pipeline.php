@@ -42,6 +42,4 @@ class Pipeline
         $this->workingDirectory = $workingDirectory;
         return $this;
     }
-
-
 }

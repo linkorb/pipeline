@@ -10,10 +10,9 @@ require_once __DIR__ . "/../vendor/autoload.php";
 
 $loader = new YamlLoader();
 $pipeline = $loader->loadFile(__DIR__ . '/demo.pipeline.yml');
-//print_r($pipeline);
 
 $job = new Job($pipeline);
-$job->setVariable('topic', 'technology');
+$job->setVariable('topic', 'world');
 
 $processor = new Processor();
 $result = $processor->process($job);
