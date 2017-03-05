@@ -15,6 +15,7 @@ class Processor
     public function process(Job $job)
     {
         $variables = $job->getPipeline()->getVariables();
+        $variables = array_merge($variables, $_ENV);
         $variables = array_merge($variables, $job->getVariables());
         foreach ($variables as $key => $value) {
             if (trim($value)=='?') {

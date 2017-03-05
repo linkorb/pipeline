@@ -2,6 +2,7 @@
 <?php
 
 use Symfony\Component\Console\Application;
+use Symfony\Component\Dotenv\Dotenv;
 
 $loader = __DIR__ . '/../vendor/autoload.php';
 
@@ -18,6 +19,12 @@ if (!file_exists($loader)) {
 }
 
 require $loader;
+
+$envFilename = '.env';
+if (file_exists($envFilename)) {
+    $dotenv = new Dotenv();
+    $dotenv->load($envFilename);
+}
 
 $application = new Application('Pipeline console tool', '1.0.0');
 $application->setCatchExceptions(true);
