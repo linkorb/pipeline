@@ -62,6 +62,7 @@ class YamlLoader
     {
         $pipeline = new Pipeline($data['name']);
         $pipeline->setWorkingDirectory($basePath);
+        $pipeline->setBasePath($basePath);
 
         if (!isset($data['stages'])) {
             throw new RuntimeException("This pipeline doesn't define any stages (required)");

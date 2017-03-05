@@ -5,6 +5,8 @@ namespace Pipeline\Model;
 class Pipeline
 {
     protected $name;
+    protected $basePath;
+
     use VariableTrait;
 
     public function __construct($name)
@@ -41,5 +43,15 @@ class Pipeline
     {
         $this->workingDirectory = $workingDirectory;
         return $this;
+    }
+
+    public function setBasePath($path)
+    {
+        $this->basePath = $path;
+    }
+
+    public function getBasePath()
+    {
+        return $this->basePath;
     }
 }
