@@ -4,6 +4,7 @@ variables:
   topic: ?
   format: rss
 
+stages:
   fetch:
     command: curl -f "http://feeds.bbci.co.uk/news/{topic}/{format}.xml?edition=uk"
   validate:

@@ -25,7 +25,7 @@ class Processor
         $jobResult = new JobResult($job);
 
         $input = $job->getInput();
-        foreach ($pipeline->getStages() as $stage) {
+        foreach ($job->getPipeline()->getStages() as $stage) {
             $command = $stage->getCommand();
             foreach ($variables as $key => $value) {
                 $command = str_replace('{' . $key . '}', $value, $command);

@@ -62,12 +62,10 @@ class YamlLoader
     {
         $pipeline = new Pipeline($data['name']);
         $pipeline->setWorkingDirectory($basePath);
-        if (isset($data['variables'])) {
-            foreach ($data['variables'] as $key => $value) {
-                $pipeline->setVariable($key, $value);
-            }
-        }
 
+        if (!isset($data['stages'])) {
+            throw new RuntimeException("This pipeline doesn't define any stages (required)");
+        }
         foreach ($data['stages'] as $name => $stageData) {
             $stage = new Stage($name);
             $stage->setCommand($stageData['command']);
