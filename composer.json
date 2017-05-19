@@ -14,7 +14,7 @@
   "require": {
     "symfony/yaml": "~2.7",
     "symfony/console": "~2.7",
-    "symfony/dotenv": "3.3.x-dev",
+    "symfony/dotenv": "v3.3.0-RC1",
     "symfony/process": "~2.7"
   },
   "autoload": {
