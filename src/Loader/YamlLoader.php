@@ -60,7 +60,11 @@ class YamlLoader
 
     public function load($data, $basePath)
     {
-        $pipeline = new Pipeline($data['name']);
+        $description = null;
+        if (isset($data['description'])) {
+            $description = $data['description'];
+        }
+        $pipeline = new Pipeline($data['name'], $description);
         $pipeline->setWorkingDirectory($basePath);
         $pipeline->setBasePath($basePath);
 
