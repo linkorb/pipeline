@@ -84,7 +84,7 @@ class RunCommand extends Command
         }
 
         if ($result->isSuccessful()) {
-            if (!$input->hasOption('quiet')) {
+            if (!$input->getOption('quiet')) {
                 echo $result->getOutput();
             }
             exit(0);
