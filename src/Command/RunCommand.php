@@ -36,6 +36,12 @@ class RunCommand extends Command
                 InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
                 'Define variable (key=value)'
             )
+            ->addOption(
+                'output',
+                'o',
+                InputOption::VALUE_REQUIRED,
+                'Output JSON file with JobResult'
+            )
         ;
     }
 
@@ -53,9 +59,9 @@ class RunCommand extends Command
 
         $job = new Job($pipeline);
 
-        $input = null;
         stream_set_blocking(STDIN, false);
         $job->setInput(file_get_contents('/dev/stdin'));
+
         foreach ($defines as $define) {
             $part = explode('=', $define);
             if (count($part)!=2) {
@@ -66,6 +72,17 @@ class RunCommand extends Command
 
         $processor = new Processor();
         $result = $processor->process($job);
+
+        if ($input->hasOption('output')) {
+            $outputFilename = $input->getOption('output');
+        }
+
+        if ($outputFilename) {
+            $exporter = new JsonExporter();
+            $json = $exporter->export($result);
+            file_put_contents($outputFilename, $json);
+        }
+
         if ($result->isSuccessful()) {
             echo $result->getOutput();
             exit(0);
