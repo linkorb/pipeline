@@ -91,20 +91,24 @@ class RunCommand extends Command
         }
 
         $stageResults = $result->getStageResults();
-        foreach ($stageResults as $stageResult) {
-            $output->writeLn("<info>Stage: " . $stageResult->getStage()->getName() . "</info>", OutputInterface::VERBOSITY_VERBOSE);
-            $output->writeLn("<comment> * Command:</comment>" . $stageResult->getCommand(), OutputInterface::VERBOSITY_VERBOSE);
-            $output->writeLn("<comment> * Exitcode:</comment> " . $stageResult->getExitCode(), OutputInterface::VERBOSITY_VERBOSE);
-            $output->writeLn("<comment>" . $stageResult->getErrorOutput() . "</comment>", OutputInterface::VERBOSITY_VERY_VERBOSE);
-            $output->writeLn($stageResult->getOutput(), OutputInterface::VERBOSITY_VERY_VERBOSE);
-            $output->writeLn("", OutputInterface::VERBOSITY_VERBOSE);
+        if (!$input->getOption('quiet')) {
+            foreach ($stageResults as $stageResult) {
+                $output->writeLn("<info>Stage: " . $stageResult->getStage()->getName() . "</info>", OutputInterface::VERBOSITY_VERBOSE);
+                $output->writeLn("<comment> * Command:</comment>" . $stageResult->getCommand(), OutputInterface::VERBOSITY_VERBOSE);
+                $output->writeLn("<comment> * Exitcode:</comment> " . $stageResult->getExitCode(), OutputInterface::VERBOSITY_VERBOSE);
+                $output->writeLn("<comment>" . $stageResult->getErrorOutput() . "</comment>", OutputInterface::VERBOSITY_VERY_VERBOSE);
+                $output->writeLn($stageResult->getOutput(), OutputInterface::VERBOSITY_VERY_VERBOSE);
+                $output->writeLn("", OutputInterface::VERBOSITY_VERBOSE);
+            }
         }
 
 
         $lastResult = array_pop($stageResults);
-        $output->writeLn("<error>Error in stage: " . $lastResult->getStage()->getName() . "</error>");
-        $output->writeLn("<info>" . rtrim($lastResult->getOutput(), "\n") . "</info>");
-        $output->writeLn("<comment>" . rtrim($lastResult->getErrorOutput(), "\n") . "</comment>");
+        if (!$input->getOption('quiet')) {
+            $output->writeLn("<error>Error in stage: " . $lastResult->getStage()->getName() . "</error>");
+            $output->writeLn("<info>" . rtrim($lastResult->getOutput(), "\n") . "</info>");
+            $output->writeLn("<comment>" . rtrim($lastResult->getErrorOutput(), "\n") . "</comment>");
+        }
         exit($lastResult->getExitCode());
     }
 }
