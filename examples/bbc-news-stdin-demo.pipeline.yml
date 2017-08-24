@@ -1,12 +1,9 @@
 ---
-name: Demo pipeline
-variables:
-  topic: ?
-  format: rss
-
+name: Demo pipeline stdin
+variables: ~
 stages:
-  fetch:
-    command: curl -f "http://feeds.bbci.co.uk/news/{topic}/{format}.xml?edition=uk"
+  get_source:
+    command: cat /dev/stdin
   validate:
     command: xmllint --schema rss-2_0.xsd -
   transform:
