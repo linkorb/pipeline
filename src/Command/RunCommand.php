@@ -52,6 +52,10 @@ class RunCommand extends Command
         //print_r($pipeline);
 
         $job = new Job($pipeline);
+
+        $input = null;
+        stream_set_blocking(STDIN, false);
+        $job->setInput(file_get_contents('/dev/stdin'));
         foreach ($defines as $define) {
             $part = explode('=', $define);
             if (count($part)!=2) {
