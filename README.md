@@ -13,9 +13,10 @@ Pipeline is a library + CLI tool to load programmable pipelines, execute jobs an
 
 ## CLI example
 
-    bin/pipeline run examples/demo.pipeline.yml  -d topic=technology
+    bin/pipeline run examples/bbc-news-demo.pipeline.yml -d topic=technology
+    bin/pipeline run examples/bbc-news-stdin-demo.pipeline.yml < examples/bbc-news-demo.rss.xml
 
-This will load the pipeline defined in `examples/demo.pipeline.yml` and execute it with input variable `topic=technology`
+This will load the specified pipeline and execute it with input variable `topic=technology` or send input on STDIN
 
 ## Library example
 
