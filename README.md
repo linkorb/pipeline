@@ -11,6 +11,7 @@ Pipeline is a library + CLI tool to load programmable pipelines, execute jobs an
 * JobResult: The output of a Job that has been executed on a pipeline, contains status and a StageResult for each stage in the pipeline
 * StageResult: The exact command that was executed, it's exitcode, stdout and stderr.
 
+
 ## CLI examples
 
 Load a pipeline YML file and execute it with input variable `topic=technology`
@@ -36,6 +37,14 @@ In all cases the exit code of the pipeline command will match the exit code of t
 ## Library example
 
 Please refer to `examples/example-code.php` on how to use the pipeline package as a library.
+
+
+## Configuration through environment variables
+
+pipeline will use environment variables in the inputs of pipelines. This way you don't need to define all required variables using `-d`.
+
+When pipeline runs, it first checks if a `.env` file exists in the current directory and update the environment variabels based on it's contents.
+
 
 ## License
 
