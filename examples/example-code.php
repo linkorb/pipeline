@@ -25,11 +25,11 @@ $stage = new Stage('pretty');
 $stage->setCommand('xsltproc pretty.xslt -');
 $pipeline->addStage($stage);
 
-$job = new Job();
+$job = new Job($pipeline);
 $job->setVariable('topic', 'technology');
 $job->setWorkingDirectory(__DIR__ . '/');
 
 $processor = new Processor();
-$result = $processor->process($pipeline, $job);
+$result = $processor->process($job);
 
 print_r($result);
