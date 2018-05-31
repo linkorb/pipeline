@@ -26,6 +26,7 @@ class Processor
         $jobResult = new JobResult($job);
 
         $input = $job->getInput();
+
         foreach ($job->getPipeline()->getStages() as $stage) {
             $command = $stage->getCommand();
             foreach ($variables as $key => $value) {
@@ -35,19 +36,40 @@ class Processor
             $stageResult->setCommand($command);
             $jobResult->addStageResult($stageResult);
 
-            $process = new Process($command);
+            //print_r($job->getVariables());exit();
+            //print_r($_ENV);exit();
+            // echo $command . PHP_EOL;
+
+            $process = new Process($command, null, null);
             $process->setTimeout(3600);
             $process->setIdleTimeout(3600);
             $process->setInput($input);
             $process->setWorkingDirectory($job->getWorkingDirectory());
             $process->run();
-            $stageResult->setExitCode($process->getExitCode());
-            $stageResult->setOutput($process->getOutput());
-            $stageResult->setErrorOutput($process->getErrorOutput());
-            $input = $process->getOutput();
+
+            $output = $process->getOutput();
+            $errorOutput = $process->getErrorOutput();
+            $exitCode = $process->getExitCode();
+
+            // echo "ExitCode: $exitCode\n";
+            // echo "Output length: " . strlen($output) . "\n";
+            // echo "Error length: " . strlen($errorOutput) . "\n";
+
+
+            $stageResult->setExitCode($exitCode);
+            $stageResult->setOutput($output);
+            $stageResult->setErrorOutput($errorOutput);
+
+            if (!$output) {
+                throw new RuntimeException("No output...");
+            }
+
+
             if (!$process->isSuccessful()) {
                 return $jobResult;
             }
+
+            $input = $output; // provide input for next run
         }
 
         return $jobResult;
