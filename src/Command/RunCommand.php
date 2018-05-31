@@ -67,7 +67,11 @@ class RunCommand extends Command
             if (count($part)!=2) {
                 throw new RuntimeException("--define (-d) usage: -d color=green");
             }
+            // pass variables to job
             $job->setVariable(trim($part[0]), trim($part[1]));
+            // pass them on to the environment too
+            putenv(trim($part[0]) . '=' . trim($part[1]));
+            $_ENV[trim($part[0])] = trim($part[1]);
         }
 
         $processor = new Processor();
