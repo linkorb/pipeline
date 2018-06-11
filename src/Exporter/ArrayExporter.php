@@ -18,7 +18,7 @@ class ArrayExporter
         $data['variables'] = $job->getVariables();
         $data['stage_results'] = [];
         foreach ($jobResult->getStageResults() as $stageResult) {
-            $data['stage_results'][] = $this->exportStageResult($stageResult);
+            $data['stage_results'][$stageResult->getStage()->getName()] = $this->exportStageResult($stageResult);
         }
         $data['output'] = $jobResult->getOutput();
         $data['successful'] = $jobResult->isSuccessful();
