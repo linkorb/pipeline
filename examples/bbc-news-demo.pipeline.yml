@@ -6,7 +6,7 @@ variables:
 
 stages:
   fetch:
-      command: curl -f "http://feeds.bbci.co.uk/news/{topic}/{format}.xml?edition=uk"
+    command: curl -f "http://feeds.bbci.co.uk/news/{topic}/{format}.xml?edition=uk"
   validate:
     command: xmllint --schema rss-2_0.xsd -
   transform:
