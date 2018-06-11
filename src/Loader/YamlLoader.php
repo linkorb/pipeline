@@ -73,6 +73,9 @@ class YamlLoader
         }
         foreach ($data['stages'] as $name => $stageData) {
             $stage = new Stage($name);
+            if (isset($stageData['input'])) {
+                $stage->setInput($stageData['input']);
+            }
             $stage->setCommand($stageData['command']);
 
             $pipeline->addStage($stage);

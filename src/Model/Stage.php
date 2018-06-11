@@ -17,6 +17,19 @@ class Stage
         return $this->name;
     }
 
+    protected $input;
+
+    public function getInput()
+    {
+        return $this->input;
+    }
+
+    public function setInput($input)
+    {
+        $this->input = $input;
+        return $this;
+    }
+
     protected $command;
 
     public function getCommand()

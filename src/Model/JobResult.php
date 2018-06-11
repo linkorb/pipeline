@@ -24,9 +24,17 @@ class JobResult
         return $this->stageResults;
     }
 
+    public function getStageResult($stageName)
+    {
+        if (!isset($this->stageResults[$stageName])) {
+            throw new RuntimeException("No result for stage: " . $stageName);
+        }
+        return $this->stageResults[$stageName];
+    }
+
     public function addStageResult(StageResult $stageResult)
     {
-        $this->stageResults[] = $stageResult;
+        $this->stageResults[$stageResult->getStage()->getName()] = $stageResult;
         return $this;
     }
 

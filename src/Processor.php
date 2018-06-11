@@ -43,6 +43,10 @@ class Processor
             $process = new Process($command, null, null);
             $process->setTimeout(3600);
             $process->setIdleTimeout(3600);
+            if ($stage->getInput()) {
+                $inputStageResult = $jobResult->getStageResult($stage->getInput());
+                $input = $inputStageResult->getOutput();
+            }
             $process->setInput($input);
             $process->setWorkingDirectory($job->getWorkingDirectory());
             $process->run();
